@@ -3,7 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react"
 import { CheckCircle2, Heart, Sparkles } from "lucide-react"
 import { addVictory } from "@/lib/progress-store"
-
+import { SignatureDownloadCard } from "@/components/signature-download-card"
 const STORAGE_KEY = "signature-demeurer-mvp"
 const ONBOARDING_KEY = "signature-onboarding"
 const DAILY_CHECK_IN_KEY = "signature-daily-check-in"
@@ -241,7 +241,19 @@ export function DemeurerPage() {
           <CheckCircle2 className="h-4 w-4" />
           {saved ? "Moment gardé" : "Garder ce moment"}
         </button>
-
+       <SignatureDownloadCard
+  title="Demeurer"
+  subtitle="Revenir doucement à Dieu."
+  verse="Demeurez en moi, et je demeurerai en vous."
+  reference="Jean 15:4"
+  fileName="signature-demeurer"
+  lines={[
+    { label: "Ce que j’apporte à Dieu", value: depot },
+    { label: "Ce que je désire recevoir", value: recevoir },
+    { label: "Ce que je veux entendre", value: parole },
+    { label: "Ma prière simple", value: priere },
+  ]}
+/>
         <p className="mt-3 text-center text-xs text-muted-foreground">
           Ce moment reste dans ton espace personnel.
         </p>

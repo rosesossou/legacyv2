@@ -3,7 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react"
 import { CheckCircle2, Heart } from "lucide-react"
 import { addVictory } from "@/lib/progress-store"
-
+import { SignatureDownloadCard } from "@/components/signature-download-card"
 const STORAGE_KEY = "signature-carnet-mvp"
 
 export function CarnetPage() {
@@ -156,7 +156,19 @@ export function CarnetPage() {
           <CheckCircle2 className="h-4 w-4" />
           {saved ? "Carnet gardé" : "Garder mon carnet"}
         </button>
-
+  <SignatureDownloadCard
+  title="Revenir à la vérité"
+  subtitle="Laisser Dieu remettre de la lumière dans mes pensées."
+  verse="Vous connaîtrez la vérité, et la vérité vous rendra libres."
+  reference="Jean 8:32"
+  fileName="signature-carnet"
+  lines={[
+    { label: "Ce que je ressens", value: ceQueJePorte },
+    { label: "Ce qui est vrai devant Dieu", value: ceQueDieuEnDit },
+    { label: "La vérité que je choisis de garder", value: ceQueJeGarde },
+    { label: "Ce que cette vérité m’invite à faire", value: petitPas },
+  ]}
+/>
         <p className="mt-3 text-center text-xs text-muted-foreground">
           Ce moment reste dans ton espace personnel.
         </p>

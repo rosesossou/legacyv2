@@ -3,7 +3,7 @@
 import { useEffect, useState, type ReactNode } from "react"
 import { addVictory } from "@/lib/progress-store"
 import { CheckCircle2, Heart } from "lucide-react"
-
+import { SignatureDownloadCard } from "@/components/signature-download-card"
 const STORAGE_KEY = "signature-actions-mvp"
 
 export function ActionsPage() {
@@ -155,7 +155,19 @@ export function ActionsPage() {
           <CheckCircle2 className="h-4 w-4" />
           {saved ? "Petit pas gardé" : "Garder mon petit pas"}
         </button>
-
+        <SignatureDownloadCard
+  title="Mon petit pas"
+  subtitle="Une action simple, fidèle et possible aujourd’hui."
+  verse="Qui méprise le jour des faibles commencements ?"
+  reference="Zacharie 4:10"
+  fileName="signature-actions"
+  lines={[
+    { label: "Mon petit pas", value: action },
+    { label: "Ce qui peut m’aider", value: aide },
+    { label: "Ce que je remets à Dieu", value: remise },
+    { label: "Ma petite victoire", value: victoire },
+  ]}
+/>
         <p className="mt-3 text-center text-xs text-muted-foreground">
           Ce petit pas reste dans ton espace personnel.
         </p>
