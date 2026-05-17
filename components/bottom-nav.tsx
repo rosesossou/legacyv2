@@ -15,7 +15,7 @@ const tabs = [
   { id: "demeurer", label: "Demeurer", icon: Sparkles },
    { id: "carnet", label: "Carnet", icon: NotebookPen },
   { id: "actions", label: "Actions", icon: Footprints },
-  { id: "parcours", label: "Briller", icon: Compass },
+  { id: "parcours", label: "Devenir", icon: Compass },
   { id: "enseignement", label: "Ressources", icon: BookOpen },
  
 ] as const

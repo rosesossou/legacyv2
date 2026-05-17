@@ -12,9 +12,10 @@ import {
 } from "lucide-react"
 
 export const studioTabs = [
+  { id: "parcours", label: "Parcours", icon: Route },
   { id: "cartes", label: "Cartes", icon: LayoutGrid },
   { id: "enseignements", label: "Enseignements", icon: BookOpen },
-  { id: "parcours", label: "Parcours", icon: Route },
+  
   { id: "activites", label: "Activites", icon: Users },
   { id: "questions", label: "Questions", icon: MessageCircleQuestion },
   { id: "apparence", label: "Apparence", icon: Palette },

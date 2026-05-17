@@ -14,15 +14,15 @@ interface StudioPageProps {
 }
 
 export function StudioPage({ onBack }: StudioPageProps) {
-  const [activeTab, setActiveTab] = useState<StudioTabId>("cartes")
+  const [activeTab, setActiveTab] = useState<StudioTabId>("parcours")
 
   return (
     <div className="min-h-screen bg-background">
       <StudioNav activeTab={activeTab} onTabChange={setActiveTab} onBack={onBack} />
       <div className="px-5 pb-12">
+         {activeTab === "parcours" && <StudioParcours />}
         {activeTab === "cartes" && <StudioCartes />}
         {activeTab === "enseignements" && <StudioEnseignements />}
-        {activeTab === "parcours" && <StudioParcours />}
         {activeTab === "activites" && <StudioActivites />}
         {activeTab === "questions" && <StudioQuestions />}
         {activeTab === "apparence" && <StudioApparence />}

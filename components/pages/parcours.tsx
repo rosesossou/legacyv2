@@ -17,50 +17,57 @@ const pillars = [
   {
     id: 1,
     icon: Brain,
-    title: "Pensees & forteresses",
-    description: "Identifier les pensees, peurs et croyances qui limitent ma croissance.",
+    title: "Mes pensées actuelles",
+    description:
+      "Observer mes pensées et laisser Dieu y remettre de la clarté.",
     color: "bg-rose/20 text-burgundy",
   },
   {
     id: 2,
     icon: Fingerprint,
-    title: "Destinee & identite",
-    description: "Clarifier la femme que je deviens et ce que Dieu a place en moi.",
+    title: "Ma saison avec Dieu",
+    description:
+      "Discerner ce que Dieu forme en moi dans cette saison.",
     color: "bg-gold/20 text-dark-brown",
   },
   {
     id: 3,
     icon: Footprints,
     title: "Discipline & petits pas",
-    description: "Transformer mes intentions en comportements simples et repetes.",
+    description:
+      "Choisir une action simple, réaliste et fidèle pour avancer sans pression.",
     color: "bg-champagne text-dark-brown",
   },
   {
     id: 4,
     icon: GraduationCap,
-    title: "Education & excellence",
-    description: "Apprendre, me former, elever ma pensee et ma maniere de vivre.",
+    title: "Éducation & excellence",
+    description:
+      "Apprendre, grandir et élever ma manière de penser avec sagesse.",
     color: "bg-secondary text-plum",
   },
   {
     id: 5,
     icon: Coins,
     title: "Finances & sagesse",
-    description: "Gerer mes ressources avec responsabilite, vision et maturite.",
+    description:
+      "Gérer mes ressources avec paix, responsabilité et vision.",
     color: "bg-gold/15 text-dark-brown",
   },
   {
     id: 6,
     icon: Heart,
     title: "Relations & posture",
-    description: "Construire des relations saines et devenir une presence qui eleve.",
+    description:
+      "Construire des relations saines et devenir une présence qui élève.",
     color: "bg-rose/15 text-burgundy",
   },
   {
     id: 7,
     icon: Building2,
-    title: "Heritage & impact",
-    description: "Penser au-dela de moi et batir ce que je veux transmettre.",
+    title: "L’héritage que je construis",
+    description:
+      "Clarifier la trace que je veux laisser par ma foi, mes choix et mes petits actes.",
     color: "bg-emerald/15 text-emerald",
   },
 ]
@@ -78,30 +85,47 @@ function PillarDetail({ pillar, onBack }: PillarDetailProps) {
         className="mb-6 flex items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />
-        Retour aux piliers
+        Retour au parcours
       </button>
-      <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl ${pillar.color}`}>
+
+      <div
+        className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl ${pillar.color}`}
+      >
         <pillar.icon className="h-7 w-7" strokeWidth={1.5} />
       </div>
-      <h2 className="font-serif text-2xl font-bold text-foreground">{pillar.title}</h2>
-      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{pillar.description}</p>
+
+      <h2 className="font-serif text-2xl font-bold text-foreground">
+        {pillar.title}
+      </h2>
+
+      <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        {pillar.description}
+      </p>
+
       <div className="mt-8 rounded-2xl border border-border bg-card p-5">
-        <h3 className="font-serif text-sm font-semibold text-foreground">Questions de reflexion</h3>
+        <h3 className="font-serif text-sm font-semibold text-foreground">
+          Questions douces
+        </h3>
+
         <ul className="mt-4 flex flex-col gap-3">
           <li className="text-sm leading-relaxed text-muted-foreground">
-            {"Ou en suis-je dans ce domaine de ma vie ?"}
+            Où est-ce que j’en suis dans ce domaine, avec honnêteté et douceur ?
           </li>
+
           <li className="text-sm leading-relaxed text-muted-foreground">
-            {"Qu'est-ce que je veux changer ou developper ?"}
+            Qu’est-ce que Dieu semble vouloir éclairer ou former en moi ?
           </li>
+
           <li className="text-sm leading-relaxed text-muted-foreground">
-            {"Quel petit pas puis-je poser cette semaine ?"}
+            Quel petit pas simple puis-je poser cette semaine ?
           </li>
         </ul>
       </div>
+
       <div className="mt-4 rounded-2xl border border-gold/20 bg-champagne/50 p-5">
         <p className="font-serif text-sm italic leading-relaxed text-dark-brown">
-          {"Chaque pilier est une invitation a grandir avec intention, pas a courir apres la perfection."}
+          Chaque pilier est une invitation à grandir avec intention, pas à courir
+          après la perfection.
         </p>
       </div>
     </div>
@@ -113,8 +137,14 @@ export function ParcoursPage() {
 
   if (selectedPillar !== null) {
     const pillar = pillars.find((p) => p.id === selectedPillar)
+
     if (pillar) {
-      return <PillarDetail pillar={pillar} onBack={() => setSelectedPillar(null)} />
+      return (
+        <PillarDetail
+          pillar={pillar}
+          onBack={() => setSelectedPillar(null)}
+        />
+      )
     }
   }
 
@@ -123,15 +153,19 @@ export function ParcoursPage() {
       {/* Header */}
       <div className="mb-1 flex items-center gap-2">
         <span className="h-px w-6 bg-gold" />
+
         <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
-          7 piliers
+          Parcours
         </span>
       </div>
+
       <h1 className="font-serif text-2xl font-bold text-foreground">
-        Mon parcours de formation
+        Mon chemin avec Dieu
       </h1>
+
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        Sept piliers pour batir une vie de foi, d&apos;excellence et d&apos;heritage.
+        Quelques repères pour grandir avec foi, douceur et intention, sans
+        pression ni comparaison.
       </p>
 
       {/* Pillar Cards */}
@@ -142,28 +176,34 @@ export function ParcoursPage() {
             className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-200 hover:shadow-md"
           >
             <div className="flex items-start gap-4">
-              <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${pillar.color}`}>
+              <div
+                className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${pillar.color}`}
+              >
                 <pillar.icon className="h-5 w-5" strokeWidth={1.5} />
               </div>
+
               <div className="flex flex-1 flex-col gap-1">
                 <div className="flex items-center gap-1.5">
                   <span className="text-[10px] font-medium text-gold">
                     {String(pillar.id).padStart(2, "0")}
                   </span>
+
                   <h3 className="font-serif text-sm font-semibold text-foreground">
                     {pillar.title}
                   </h3>
                 </div>
+
                 <p className="text-xs leading-relaxed text-muted-foreground">
                   {pillar.description}
                 </p>
               </div>
             </div>
+
             <button
               onClick={() => setSelectedPillar(pillar.id)}
               className="flex items-center gap-1.5 self-end text-xs font-medium text-burgundy transition-colors hover:text-plum"
             >
-              Explorer ce pilier
+              Explorer doucement
               <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </div>
