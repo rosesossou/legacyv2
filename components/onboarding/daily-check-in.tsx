@@ -153,7 +153,7 @@ export function DailyCheckIn({ onComplete }: DailyCheckInProps) {
               onClick={enterApp}
               className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
             >
-              Entrer doucement
+              Entrer en douceur
               <ArrowRight className="h-4 w-4" />
             </button>
 

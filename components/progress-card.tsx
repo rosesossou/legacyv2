@@ -33,7 +33,7 @@ const growthStages = [
     icon: Leaf,
     message: "Tes racines se fortifient dans le secret.",
     encouragement:
-      "Ce que tu fais avec Dieu, même doucement, construit quelque chose en toi.",
+      "Ce que tu fais avec Dieu construit quelque chose en toi.",
   },
   {
     min: 6,
@@ -42,7 +42,7 @@ const growthStages = [
     icon: Sprout,
     message: "Quelque chose commence à sortir de terre.",
     encouragement:
-      "Continue doucement. Dieu travaille aussi dans les petits commencements.",
+      "Dieu travaille aussi dans les petits commencements.",
   },
   {
     min: 10,
@@ -108,7 +108,7 @@ export function ProgressCard() {
 
         <div className="flex-1">
           <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground">
-            Ce qui grandit doucement
+            Ce qui grandit petit à petit
           </p>
 
           <h2 className="mt-1 font-serif text-2xl leading-tight text-foreground">

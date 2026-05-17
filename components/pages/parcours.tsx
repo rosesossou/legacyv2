@@ -203,7 +203,7 @@ export function ParcoursPage() {
               onClick={() => setSelectedPillar(pillar.id)}
               className="flex items-center gap-1.5 self-end text-xs font-medium text-burgundy transition-colors hover:text-plum"
             >
-              Explorer doucement
+              Explorer 
               <ChevronRight className="h-3.5 w-3.5" />
             </button>
           </div>

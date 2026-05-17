@@ -46,7 +46,7 @@ export function AccueilPage({ onNavigate }: AccueilPageProps) {
           onClick={() => onNavigate("demeurer")}
           className="mt-8 flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
         >
-          Commencer doucement
+          Commencer avec douceur
           <ArrowRight className="h-4 w-4" />
         </button>
       </section>

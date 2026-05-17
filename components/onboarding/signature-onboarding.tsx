@@ -17,7 +17,7 @@ const needs = [
 ]
 
 const anchorSuggestions = [
-  "Je peux avancer doucement.",
+  "Je peux avancer à mon rythme.",
   "Dieu travaille aussi dans les petits commencements.",
   "Je n’ai rien à prouver.",
   "Une phrase suffit.",
@@ -86,12 +86,13 @@ export function SignatureOnboarding({ onComplete }: SignatureOnboardingProps) {
           </div>
 
           <h1 className="font-serif text-3xl font-bold text-foreground">
-            Avant de commencer
-          </h1>
+  Avant de commencer
+</h1>
 
-          <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-            Prends un instant pour te rencontrer avec douceur. Une phrase suffit.
-          </p>
+<p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+  Signature t’aide à clarifier ton esprit, déposer ce qui pèse et poser un
+  petit pas avec Dieu. Une phrase suffit pour commencer.
+</p>
         </div>
 
         <div className="flex flex-1 items-center">
@@ -190,7 +191,7 @@ export function SignatureOnboarding({ onComplete }: SignatureOnboardingProps) {
                 onClick={nextStep}
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
               >
-                Continuer doucement
+                Continuer 
                 <ArrowRight className="h-4 w-4" />
               </button>
 
@@ -217,7 +218,7 @@ export function SignatureOnboarding({ onComplete }: SignatureOnboardingProps) {
                 </p>
 
                 <h2 className="mt-4 font-serif text-3xl leading-tight text-white">
-                  Doucement.
+                  Ici
                 </h2>
 
                 <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-white/75">
@@ -246,7 +247,7 @@ export function SignatureOnboarding({ onComplete }: SignatureOnboardingProps) {
                   onClick={completeOnboarding}
                   className="mt-7 flex w-full items-center justify-center rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-[#4b143b] shadow-lg transition-all duration-200 hover:shadow-xl active:scale-[0.98]"
                 >
-                  Entrer doucement
+                  Entrer en douceur
                 </button>
               </div>
             </div>

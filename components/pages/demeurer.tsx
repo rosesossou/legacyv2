@@ -99,7 +99,7 @@ export function DemeurerPage() {
         </div>
 
         <h1 className="font-serif text-3xl font-bold text-foreground">
-          Revenir doucement à Dieu
+          Revenir  à Dieu
         </h1>
 
         <p className="mx-auto mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
@@ -121,7 +121,7 @@ export function DemeurerPage() {
                   Ton ancrage
                 </p>
                 <h2 className="font-serif text-lg text-foreground">
-                  Tu peux revenir doucement.
+                  Tu peux revenir...
                 </h2>
               </div>
             </div>
@@ -243,7 +243,7 @@ export function DemeurerPage() {
         </button>
        <SignatureDownloadCard
   title="Demeurer"
-  subtitle="Revenir doucement à Dieu."
+  subtitle="Revenir  à Dieu."
   verse="Demeurez en moi, et je demeurerai en vous."
   reference="Jean 15:4"
   fileName="signature-demeurer"
