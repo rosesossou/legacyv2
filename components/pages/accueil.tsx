@@ -107,25 +107,25 @@ export function AccueilPage({ onNavigate }: AccueilPageProps) {
 
         <div className="flex flex-col gap-3">
           <PathCard
-            title="Demeurer"
-            description="Revenir à Dieu, respirer et déposer ce qui pèse."
-            buttonLabel="Revenir à Dieu"
-            onClick={() => onNavigate("demeurer")}
-          />
+  title="1. Demeurer"
+  description="Revenir à Dieu, respirer et lui apporter ce qui est là."
+  buttonLabel="Commencer ici"
+  onClick={() => onNavigate("demeurer")}
+/>
 
-          <PathCard
-            title="Carnet"
-            description="Écrire ce que je porte et regarder ce que Dieu en dit dans Sa Parole."
-            buttonLabel="Déposer une pensée"
-            onClick={() => onNavigate("carnet")}
-          />
+<PathCard
+  title="2. Mon carnet de vérité"
+  description="Regarder ce que je ressens et revenir à la vérité de Dieu."
+  buttonLabel="Continuer avec la vérité"
+  onClick={() => onNavigate("carnet")}
+/>
 
-          <PathCard
-            title="Actions"
-            description="Choisir un petit pas concret, simple et fidèle."
-            buttonLabel="Poser un petit pas"
-            onClick={() => onNavigate("actions")}
-          />
+<PathCard
+  title="3. Actions"
+  description="Choisir un petit pas concret, simple et fidèle."
+  buttonLabel="Terminer par un petit pas"
+  onClick={() => onNavigate("actions")}
+/>
         </div>
       </section>
 

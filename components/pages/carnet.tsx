@@ -55,7 +55,7 @@ export function CarnetPage() {
         <div className="mb-3 flex items-center justify-center gap-2">
           <span className="h-px w-8 bg-gold" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
-            Carnet
+            Mon carnet de vérité
           </span>
           <span className="h-px w-8 bg-gold" />
         </div>
@@ -83,7 +83,7 @@ export function CarnetPage() {
               </h2>
 
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                Tu peux venir avec ce que tu ressens, puis regarder doucement ce
+                Tu peux venir avec ce que tu ressens, puis regarder ce
                 que Dieu en dit dans Sa Parole.
               </p>
               <div className="mt-4 rounded-2xl bg-background/70 px-4 py-3">
