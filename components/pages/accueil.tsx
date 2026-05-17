@@ -8,6 +8,7 @@ import {
   Sparkles,
 } from "lucide-react"
 import { ProgressCard } from "@/components/progress-card"
+import { getDailyReminder } from "@/lib/reminders"
 
 type TabId = "accueil" | "demeurer" | "carnet" | "actions"
 
@@ -17,10 +18,12 @@ interface AccueilPageProps {
 }
 
 export function AccueilPage({ onNavigate }: AccueilPageProps) {
+  const dailyReminder = getDailyReminder()
+
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="relative flex flex-col items-center px-6 pt-14 pb-10 text-center">
+      <section className="relative flex flex-col items-center px-6 pt-14 pb-8 text-center">
         <div className="mb-3 flex items-center gap-2">
           <span className="h-px w-8 bg-gold" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
@@ -38,52 +41,65 @@ export function AccueilPage({ onNavigate }: AccueilPageProps) {
         </p>
 
         <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Signature t’aide à clarifier ton esprit, revenir à Dieu et poser un petit pas
-  juste pour aujourd’hui.
+          Signature t’aide à clarifier ton esprit, revenir à Dieu et poser un
+          petit pas juste pour aujourd’hui.
         </p>
 
         <button
           onClick={() => onNavigate("demeurer")}
           className="mt-8 flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
         >
-          Commencer avec douceur
+          Commencer mon moment
           <ArrowRight className="h-4 w-4" />
         </button>
       </section>
 
+      {/* Rappel du jour */}
+      <section className="px-5 pb-6">
+        <div className="rounded-3xl border border-gold/20 bg-champagne/40 p-5 text-center shadow-sm">
+          <p className="text-xs uppercase tracking-[0.25em] text-gold">
+            Rappel du jour
+          </p>
+
+          <p className="mx-auto mt-3 max-w-sm font-serif text-lg leading-relaxed text-foreground">
+            {dailyReminder}
+          </p>
+        </div>
+      </section>
+
       {/* Aujourd'hui */}
       <section className="px-5 pb-8">
-        <div className="rounded-3xl border border-gold/20 bg-champagne/40 p-5 shadow-sm">
+        <div className="rounded-3xl border border-gold/20 bg-card p-5 shadow-sm">
           <p className="text-sm uppercase tracking-[0.25em] text-gold">
             Aujourd’hui
           </p>
 
           <h2 className="mt-2 font-serif text-2xl leading-tight text-foreground">
-            Une phrase suffit.
+            Ton moment commence ici.
           </h2>
 
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Tu n’as pas besoin de tout remplir. Viens comme tu es, écris ce qui
-            est là, puis choisis un petit pas fidèle.
+            Tu n’as pas besoin de tout comprendre tout de suite. Suis simplement
+            les 3 étapes : Demeurer, Mon carnet de vérité, puis Actions.
           </p>
 
           <div className="mt-5 grid gap-3">
             <SimpleStep
               icon={<Heart className="h-4 w-4" />}
               title="1. Je demeure"
-              description="Je prends un moment pour revenir à Dieu."
+              description="Je reviens à Dieu avec ce qui est là."
             />
 
             <SimpleStep
               icon={<PenLine className="h-4 w-4" />}
-              title="2. Je dépose"
-              description="J’écris ce que je porte, sans me juger."
+              title="2. Je reviens à la vérité"
+              description="Je regarde ce que je ressens à la lumière de Dieu."
             />
 
             <SimpleStep
               icon={<Footprints className="h-4 w-4" />}
-              title="3. J’avance"
-              description="Je choisis un petit pas simple pour aujourd’hui."
+              title="3. Je pose un petit pas"
+              description="Je choisis une action simple pour aujourd’hui."
             />
           </div>
         </div>
@@ -97,35 +113,36 @@ export function AccueilPage({ onNavigate }: AccueilPageProps) {
           </p>
 
           <h2 className="mt-2 font-serif text-2xl font-bold text-foreground">
-            Ton chemin aujourd’hui
+            Ton moment en 3 étapes
           </h2>
 
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Trois espaces simples pour revenir à l’essentiel.
+            Commence par Demeurer, continue avec Mon carnet de vérité, puis
+            termine par un petit pas.
           </p>
         </div>
 
         <div className="flex flex-col gap-3">
           <PathCard
-  title="1. Demeurer"
-  description="Revenir à Dieu, respirer et lui apporter ce qui est là."
-  buttonLabel="Commencer ici"
-  onClick={() => onNavigate("demeurer")}
-/>
+            title="1. Demeurer"
+            description="Revenir à Dieu, respirer et lui apporter ce qui est là."
+            buttonLabel="Commencer ici"
+            onClick={() => onNavigate("demeurer")}
+          />
 
-<PathCard
-  title="2. Mon carnet de vérité"
-  description="Regarder ce que je ressens et revenir à la vérité de Dieu."
-  buttonLabel="Continuer avec la vérité"
-  onClick={() => onNavigate("carnet")}
-/>
+          <PathCard
+            title="2. Mon carnet de vérité"
+            description="Regarder ce que je ressens et revenir à la vérité de Dieu."
+            buttonLabel="Continuer avec la vérité"
+            onClick={() => onNavigate("carnet")}
+          />
 
-<PathCard
-  title="3. Actions"
-  description="Choisir un petit pas concret, simple et fidèle."
-  buttonLabel="Terminer par un petit pas"
-  onClick={() => onNavigate("actions")}
-/>
+          <PathCard
+            title="3. Actions"
+            description="Choisir un petit pas concret, simple et fidèle."
+            buttonLabel="Terminer par un petit pas"
+            onClick={() => onNavigate("actions")}
+          />
         </div>
       </section>
 
@@ -173,7 +190,7 @@ function SimpleStep({
   description: string
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-2xl bg-card/80 p-4">
+    <div className="flex items-start gap-3 rounded-2xl bg-background/70 p-4">
       <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
         {icon}
       </div>
