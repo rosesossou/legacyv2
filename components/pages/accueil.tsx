@@ -5,25 +5,18 @@ import {
   Heart,
   PenLine,
   Footprints,
-  Settings,
   Sparkles,
 } from "lucide-react"
 import { ProgressCard } from "@/components/progress-card"
 
-type TabId =
-  | "accueil"
-  | "parcours"
-  | "demeurer"
-  | "enseignement"
-  | "carnet"
-  | "actions"
+type TabId = "accueil" | "demeurer" | "carnet" | "actions"
 
 interface AccueilPageProps {
   onNavigate: (tab: TabId) => void
-  onOpenStudio: () => void
+  onOpenStudio?: () => void
 }
 
-export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
+export function AccueilPage({ onNavigate }: AccueilPageProps) {
   return (
     <div className="flex flex-col">
       {/* Hero */}
@@ -45,8 +38,8 @@ export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
         </p>
 
         <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Un espace doux pour revenir à Dieu, déposer ce que tu portes et
-          avancer par petits pas, sans pression ni comparaison.
+          Revenir à Dieu. Déposer ce que tu portes. Avancer par petits pas,
+          sans pression ni comparaison.
         </p>
 
         <button
@@ -66,19 +59,19 @@ export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
           </p>
 
           <h2 className="mt-2 font-serif text-2xl leading-tight text-foreground">
-            Commence simplement.
+            Une phrase suffit.
           </h2>
 
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Tu n’as pas besoin de tout remplir. Une phrase, une prière ou un
-            petit pas fidèle suffisent.
+            Tu n’as pas besoin de tout remplir. Viens comme tu es, écris ce qui
+            est là, puis choisis un petit pas fidèle.
           </p>
 
           <div className="mt-5 grid gap-3">
             <SimpleStep
               icon={<Heart className="h-4 w-4" />}
               title="1. Je demeure"
-              description="Je prends quelques minutes pour revenir à Dieu."
+              description="Je prends un moment pour revenir à Dieu."
             />
 
             <SimpleStep
@@ -90,53 +83,53 @@ export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
             <SimpleStep
               icon={<Footprints className="h-4 w-4" />}
               title="3. J’avance"
-              description="Je choisis un petit pas simple et réaliste."
+              description="Je choisis un petit pas simple pour aujourd’hui."
             />
           </div>
         </div>
       </section>
 
-      {/* Chemin Signature */}
+      {/* Rituel principal */}
       <section className="px-5 pb-8">
         <div className="mb-5">
           <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground">
-            Chemin
+            Rituel
           </p>
 
           <h2 className="mt-2 font-serif text-2xl font-bold text-foreground">
-            Mon chemin Signature
+            Ton chemin aujourd’hui
           </h2>
 
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Trois espaces pour avancer avec douceur, selon ta saison.
+            Trois espaces simples pour revenir à l’essentiel.
           </p>
         </div>
 
         <div className="flex flex-col gap-3">
           <PathCard
             title="Demeurer"
-            description="Revenir à Dieu, respirer, écouter ce qu’Il travaille en moi."
-            buttonLabel="Entrer dans ce moment"
+            description="Revenir à Dieu, respirer et déposer ce qui pèse."
+            buttonLabel="Revenir à Dieu"
             onClick={() => onNavigate("demeurer")}
           />
 
           <PathCard
             title="Carnet"
-            description="Déposer mes pensées, clarifier ma saison et nommer ce que je porte."
-            buttonLabel="Écrire une phrase"
+            description="Écrire ce que je porte et regarder ce que Dieu en dit dans Sa Parole."
+            buttonLabel="Déposer une pensée"
             onClick={() => onNavigate("carnet")}
           />
 
           <PathCard
             title="Actions"
-            description="Choisir un petit pas fidèle et célébrer ma progression."
-            buttonLabel="Choisir un petit pas"
+            description="Choisir un petit pas concret, simple et fidèle."
+            buttonLabel="Poser un petit pas"
             onClick={() => onNavigate("actions")}
           />
         </div>
       </section>
 
-      {/* Petits pas célébrés */}
+      {/* Progression douce */}
       <section className="px-5 pb-8">
         <ProgressCard />
       </section>
@@ -166,61 +159,6 @@ export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
           </div>
         </div>
       </section>
-
-      {/* Construire mon chemin */}
-<section className="px-5 pb-8">
-  <div
-    className="relative overflow-hidden rounded-[2rem] p-6 shadow-lg"
-    style={{
-      background:
-        "radial-gradient(circle at 85% 0%, rgba(239, 229, 142, 0.28), transparent 32%), linear-gradient(145deg, #2b0b35 0%, #4b143b 48%, #8a4f55 100%)",
-    }}
-  >
-    <div className="absolute right-[-40px] top-[-40px] h-32 w-32 rounded-full bg-gold/20 blur-3xl" />
-
-    <div className="relative">
-      <p className="text-xs uppercase tracking-[0.3em] text-gold">
-        Mon parcours
-      </p>
-
-      <h2 className="mt-3 font-serif text-3xl leading-tight text-white">
-        Construire mon chemin
-      </h2>
-
-      <p className="mt-4 text-sm leading-relaxed text-white/75">
-        Prépare ton parcours de croissance avec des questions, des enseignements,
-        des activités et des petits pas pour chaque semaine.
-      </p>
-
-      <div className="mt-5 grid grid-cols-2 gap-2">
-        <div className="rounded-2xl border border-white/15 bg-white/10 p-3">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-gold">
-            Mois
-          </p>
-          <p className="mt-1 text-sm font-semibold text-white">
-            Parcours mensuels
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-white/15 bg-white/10 p-3">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-gold">
-            Semaine
-          </p>
-          <p className="mt-1 text-sm font-semibold text-white">
-            Question + activité
-          </p>
-        </div>
-      </div>
-
-      <button
-        onClick={onOpenStudio}
-        className="mt-6 flex w-full items-center justify-center rounded-xl bg-white px-5 py-3.5 text-sm font-semibold text-[#4b143b] shadow-lg transition-all duration-200 hover:shadow-xl active:scale-[0.98]"
-      >
-        Ouvrir mon parcours
-      </button>
-    </div>
-  </div>
-</section>
     </div>
   )
 }

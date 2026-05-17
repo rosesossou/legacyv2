@@ -1,23 +1,13 @@
 "use client"
 
-import {
-  Home,
-  Compass,
-  Sparkles,
-  BookOpen,
-  NotebookPen,
-  Footprints,
-} from "lucide-react"
+import { Home, Heart, NotebookPen, Footprints } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const tabs = [
   { id: "accueil", label: "Accueil", icon: Home },
-  { id: "demeurer", label: "Demeurer", icon: Sparkles },
-   { id: "carnet", label: "Carnet", icon: NotebookPen },
+  { id: "demeurer", label: "Demeurer", icon: Heart },
+  { id: "carnet", label: "Carnet", icon: NotebookPen },
   { id: "actions", label: "Actions", icon: Footprints },
-  { id: "parcours", label: "Devenir", icon: Compass },
-  { id: "enseignement", label: "Ressources", icon: BookOpen },
- 
 ] as const
 
 export type TabId = (typeof tabs)[number]["id"]
@@ -30,7 +20,7 @@ interface BottomNavProps {
 export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-card/95 backdrop-blur-md">
-      <div className="mx-auto flex max-w-lg items-center justify-around px-1 py-2">
+      <div className="mx-auto flex max-w-lg items-center justify-around px-2 py-2">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id
 
@@ -39,7 +29,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
               key={tab.id}
               onClick={() => onTabChange(tab.id)}
               className={cn(
-                "flex flex-col items-center gap-0.5 rounded-xl px-2 py-1.5 transition-all duration-200",
+                "flex flex-col items-center gap-0.5 rounded-xl px-3 py-1.5 transition-all duration-200",
                 isActive
                   ? "text-primary"
                   : "text-muted-foreground hover:text-foreground"
@@ -55,7 +45,7 @@ export function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
 
               <span
                 className={cn(
-                  "text-[9px] leading-tight transition-all duration-200",
+                  "text-[10px] leading-tight transition-all duration-200",
                   isActive ? "font-semibold" : "font-medium"
                 )}
               >
