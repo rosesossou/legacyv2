@@ -1,0 +1,195 @@
+import type {
+  DestinyCard,
+  Teaching,
+  MonthlyJourney,
+  GroupActivity,
+  ReflectionPrompt,
+  StudioData,
+} from "./types"
+
+const mockCards: DestinyCard[] = [
+  {
+    id: "card-1",
+    weekTitle: "Semaine 1 - Sortir des forteresses",
+    collectionLabel: "Collection Pensees",
+    bibleVerse: "Nous renversons les raisonnements et toute hauteur qui s'eleve contre la connaissance de Dieu.",
+    reference: "2 Corinthiens 10:5",
+    mainDeclaration: "Je choisis de renouveler mes pensees et de laisser la verite de Dieu transformer ma maniere de voir.",
+    identityStatement: "Je suis une femme dont les pensees sont alignees avec la Parole de Dieu.",
+    formingInMe: "Le renouvellement de l'intelligence et la liberte interieure.",
+    leavingBehind: "Les pensees de peur, de doute et de devalorisation.",
+    obedienceStep: "Chaque matin, je declare une verite sur mon identite en Christ.",
+    prayer: "Seigneur, renouvelle mes pensees. Aide-moi a voir comme Tu vois, a penser comme Tu penses.",
+    visualThemeId: "deep-plum",
+    isActive: true,
+    order: 0,
+  },
+  {
+    id: "card-2",
+    weekTitle: "Semaine 2 - Connaitre mon identite",
+    collectionLabel: "Collection Identite",
+    bibleVerse: "C'est toi qui as forme mes reins, qui m'as tisse dans le sein de ma mere.",
+    reference: "Psaume 139:13",
+    mainDeclaration: "Je suis connue de Dieu, formee avec intention, creee avec un dessein unique.",
+    identityStatement: "Je suis une femme qui connait sa valeur parce qu'elle connait son Createur.",
+    formingInMe: "La connaissance profonde de qui je suis en Christ.",
+    leavingBehind: "La comparaison, le besoin de validation humaine.",
+    obedienceStep: "Ecrire 3 choses que Dieu dit de moi et les relire chaque soir.",
+    prayer: "Pere, revele-moi qui Tu m'as creee pour etre. Ancre mon identite en Toi seul.",
+    visualThemeId: "burgundy-grace",
+    isActive: false,
+    order: 1,
+  },
+  {
+    id: "card-3",
+    weekTitle: "Semaine 3 - Marcher avec discipline",
+    collectionLabel: "Collection Discipline",
+    bibleVerse: "La main des diligents enrichit. La paresse fait tomber dans le sommeil.",
+    reference: "Proverbes 10:4",
+    mainDeclaration: "Je deviens une femme structuree, fidele dans les petites choses, constante dans mes engagements.",
+    identityStatement: "Je suis une femme de discipline, non par perfection, mais par intention.",
+    formingInMe: "La constance, la regularite et la fidelite dans les petites choses.",
+    leavingBehind: "La procrastination, l'instabilite et les excuses.",
+    obedienceStep: "Poser un geste de discipline chaque jour avant 9h.",
+    prayer: "Seigneur, forme en moi un coeur discipline. Que ma vie reflecte Ta fidelite.",
+    visualThemeId: "champagne-light",
+    isActive: false,
+    order: 2,
+  },
+]
+
+const mockTeachings: Teaching[] = [
+  {
+    id: "teach-1",
+    title: "Ce que je crois finit par construire ma vie",
+    theme: "Pensees & forteresses",
+    sourceInspiration: "Renouvellement de la pensee, identite en Christ, sortie des forteresses interieures",
+    format: "audio",
+    duration: "12 min",
+    keyIdea: "Avant de changer ce que je fais, je dois identifier ce que je crois.",
+    bibleVerse: "2 Corinthiens 10:5",
+    reflectionQuestions: [
+      "Quelle pensee me limite encore aujourd'hui ?",
+      "Qu'est-ce que je crois sur moi-meme qui ne vient pas de Dieu ?",
+    ],
+    actionToApply: "Remplacer une pensee limitante par une verite a repeter cette semaine.",
+    leaderNotes: "Encourager les femmes a identifier au moins une forteresse. Prier ensemble pour la liberation.",
+    weekId: "card-1",
+    order: 0,
+  },
+  {
+    id: "teach-2",
+    title: "Connaitre mon identite avant de batir ma destinee",
+    theme: "Identite & destinee",
+    sourceInspiration: "Psaume 139, Jeremie 1:5, Ephesiens 2:10",
+    format: "text",
+    duration: "8 min",
+    keyIdea: "Je ne peux pas avancer vers ma destinee si je ne sais pas qui je suis.",
+    bibleVerse: "Jeremie 1:5",
+    reflectionQuestions: [
+      "Qui suis-je selon Dieu, en dehors de mes roles ?",
+      "Qu'est-ce qui me rend unique dans le plan de Dieu ?",
+    ],
+    actionToApply: "Ecrire une lettre a moi-meme en tant que femme de Dieu.",
+    leaderNotes: "Laisser un moment de silence. Ce sujet peut toucher profondement.",
+    weekId: "card-2",
+    order: 1,
+  },
+]
+
+const mockJourneys: MonthlyJourney[] = [
+  {
+    id: "journey-1",
+    monthTitle: "Mois 1 - Fondations interieures",
+    mainTheme: "Renouveler mes pensees et connaitre mon identite",
+    spiritualObjective: "Poser les fondations interieures necessaires avant de batir.",
+    weeklySteps: [
+      "Semaine 1 : Identifier mes forteresses mentales",
+      "Semaine 2 : Decouvrir mon identite en Christ",
+      "Semaine 3 : Commencer la discipline du renouvellement",
+      "Semaine 4 : Bilan et celebration de croissance",
+    ],
+    linkedCardIds: ["card-1", "card-2", "card-3"],
+    linkedTeachingIds: ["teach-1", "teach-2"],
+    linkedActivityId: "activity-1",
+    finalReflectionPrompts: [
+      "Qu'est-ce qui a change dans mes pensees ce mois-ci ?",
+      "Quelle verite ai-je commencee a croire ?",
+      "Quel petit pas ai-je pose qui m'a surprise ?",
+    ],
+    order: 0,
+  },
+]
+
+const mockActivities: GroupActivity[] = [
+  {
+    id: "activity-1",
+    title: "Cercle de verite",
+    objective: "Partager nos forteresses mentales et prier ensemble pour la liberation.",
+    duration: "45 min",
+    instructions: "Chaque femme partage une pensee limitante qu'elle souhaite renverser. Le groupe prie ensuite pour chaque personne.",
+    whatToPrepare: "Un carnet, un stylo, une bougie si possible pour creer une atmosphere de recueillement.",
+    journalPrompts: [
+      "Quelle pensee ai-je envie de deposer devant Dieu aujourd'hui ?",
+      "Quelle verite ai-je besoin d'entendre de mes soeurs ?",
+    ],
+    groupSharingQuestions: [
+      "Quelle est la pensee qui revient le plus souvent dans ta vie ?",
+      "Comment cette pensee influence tes decisions ?",
+    ],
+    prayerFocus: "Priere de liberation et de renouvellement des pensees.",
+    weekId: "card-1",
+    monthId: "journey-1",
+    order: 0,
+  },
+  {
+    id: "activity-2",
+    title: "Miroir de Dieu",
+    objective: "Se voir a travers les yeux de Dieu et non a travers les yeux du monde.",
+    duration: "30 min",
+    instructions: "Chaque femme lit un verset sur son identite et le declare a voix haute. Les autres femmes confirment et encouragent.",
+    whatToPrepare: "Des cartes avec des versets sur l'identite en Christ.",
+    journalPrompts: [
+      "Comment est-ce que je me vois aujourd'hui ?",
+      "Comment Dieu me voit-il ?",
+    ],
+    groupSharingQuestions: [
+      "Quel verset t'a touche le plus ?",
+      "Qu'est-ce que tu veux commencer a croire sur toi-meme ?",
+    ],
+    prayerFocus: "Priere pour que chaque femme recoive sa veritable identite en Christ.",
+    weekId: "card-2",
+    monthId: "journey-1",
+    order: 1,
+  },
+]
+
+const mockPrompts: ReflectionPrompt[] = [
+  { id: "p-1", text: "Qu'est-ce que je crois sur moi-meme qui ne vient pas de Dieu ?", category: "Coeur et pensees", order: 0 },
+  { id: "p-2", text: "Quelle pensee revient le plus souvent quand je doute ?", category: "Coeur et pensees", order: 1 },
+  { id: "p-3", text: "Quel moment avec Dieu m'a le plus marquee recemment ?", category: "Intimite avec Dieu", order: 0 },
+  { id: "p-4", text: "Qu'est-ce que Dieu m'a dit dans le silence ?", category: "Intimite avec Dieu", order: 1 },
+  { id: "p-5", text: "Qui suis-je en dehors de mes roles (mere, epouse, travailleuse) ?", category: "Identite", order: 0 },
+  { id: "p-6", text: "Quelle est la femme que Dieu est en train de former en moi ?", category: "Identite", order: 1 },
+  { id: "p-7", text: "Quel est le dessein que je sens dans mon coeur ?", category: "Dessein", order: 0 },
+  { id: "p-8", text: "A quoi est-ce que Dieu m'appelle dans cette saison ?", category: "Dessein", order: 1 },
+  { id: "p-9", text: "Qu'est-ce que Dieu me demande que je repousse ?", category: "Obeissance", order: 0 },
+  { id: "p-10", text: "Quelle est la prochaine etape d'obeissance que je connais deja ?", category: "Obeissance", order: 1 },
+  { id: "p-11", text: "Qu'est-ce que j'apprends en ce moment qui transforme ma maniere de vivre ?", category: "Formation", order: 0 },
+  { id: "p-12", text: "Quelle trace je veux laisser dans la prochaine generation ?", category: "Heritage", order: 0 },
+  { id: "p-13", text: "Comment je gere mes finances cette saison ?", category: "Finances", order: 0 },
+  { id: "p-14", text: "Quelle relation ai-je besoin de guerir ou de proteger ?", category: "Relations", order: 0 },
+  { id: "p-15", text: "Qu'est-ce que je veux apprendre dans les 3 prochains mois ?", category: "Education", order: 0 },
+  { id: "p-16", text: "Ou est-ce que je fais les choses a moitie au lieu d'exceller ?", category: "Excellence", order: 0 },
+]
+
+export function createInitialData(): StudioData {
+  return {
+    cards: mockCards,
+    teachings: mockTeachings,
+    journeys: mockJourneys,
+    activities: mockActivities,
+    prompts: mockPrompts,
+    themes: [],
+  }
+}

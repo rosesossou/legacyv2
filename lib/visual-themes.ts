@@ -1,0 +1,68 @@
+import type { VisualTheme } from "./types"
+
+export const visualThemes: VisualTheme[] = [
+  {
+    id: "deep-plum",
+    name: "Deep Plum",
+    bg: "bg-plum",
+    accent: "text-gold",
+    text: "text-cream",
+    badge: "bg-plum/80",
+  },
+  {
+    id: "burgundy-grace",
+    name: "Burgundy Grace",
+    bg: "bg-burgundy",
+    accent: "text-champagne",
+    text: "text-cream",
+    badge: "bg-burgundy/80",
+  },
+  {
+    id: "champagne-light",
+    name: "Champagne Light",
+    bg: "bg-champagne",
+    accent: "text-plum",
+    text: "text-dark-brown",
+    badge: "bg-champagne/80",
+  },
+  {
+    id: "emerald-wisdom",
+    name: "Emerald Wisdom",
+    bg: "bg-emerald",
+    accent: "text-gold",
+    text: "text-cream",
+    badge: "bg-emerald/80",
+  },
+  {
+    id: "rose-gold",
+    name: "Rose & Gold",
+    bg: "bg-rose",
+    accent: "text-gold",
+    text: "text-dark-brown",
+    badge: "bg-rose/80",
+  },
+  {
+    id: "proverbs-31",
+    name: "Proverbs 31",
+    bg: "bg-primary",
+    accent: "text-gold",
+    text: "text-primary-foreground",
+    badge: "bg-primary/80",
+  },
+  {
+    id: "new-wine",
+    name: "New Wine",
+    bg: "bg-dark-brown",
+    accent: "text-gold",
+    text: "text-cream",
+    badge: "bg-dark-brown/80",
+  },
+  {
+    id: "destinee-briller",
+    name: "Destinee a Briller",
+    bg: "bg-gold",
+    accent: "text-plum",
+    text: "text-dark-brown",
+    badge: "bg-gold/80",
+  },
+]
