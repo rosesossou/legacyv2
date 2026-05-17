@@ -86,10 +86,10 @@ export function DailyCheckIn({ onComplete }: DailyCheckInProps) {
               Avant de commencer
             </h1>
 
-            <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
-              Prends quelques secondes pour nommer comment tu arrives
-              aujourd’hui.
-            </p>
+           <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
+  Signature t’aide à clarifier ton esprit, déposer ce qui pèse et poser un
+  petit pas avec Dieu.
+</p>
           </div>
 
           <div className="rounded-[2rem] border border-gold/20 bg-card p-5 shadow-sm">
