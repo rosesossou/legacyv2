@@ -68,6 +68,7 @@ export function ActionsPage() {
           Une action simple suffit. L’objectif n’est pas de tout changer, mais
           de répondre fidèlement à ce que Dieu travaille en toi.
         </p>
+        
       </section>
 
       <section className="px-5 pb-6">
@@ -85,6 +86,14 @@ export function ActionsPage() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                 Choisis un pas si petit qu’il devient possible aujourd’hui.
               </p>
+              <div className="mt-4 rounded-2xl bg-background/70 px-4 py-3">
+  <p className="font-serif text-sm leading-relaxed text-foreground">
+    “Qui méprise le jour des faibles commencements ?”
+  </p>
+  <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-gold">
+    Zacharie 4:10
+  </p>
+</div>
             </div>
           </div>
         </div>

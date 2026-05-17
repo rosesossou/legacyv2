@@ -86,6 +86,15 @@ export function CarnetPage() {
                 Tu peux venir avec ce que tu ressens, puis regarder doucement ce
                 que Dieu en dit dans Sa Parole.
               </p>
+              <div className="mt-4 rounded-2xl bg-background/70 px-4 py-3">
+  <p className="font-serif text-sm leading-relaxed text-foreground">
+   “Vous connaîtrez la vérité, et la vérité vous rendra libres.”
+
+  </p>
+  <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-gold">
+    Jean 8:32
+  </p>
+</div>
             </div>
           </div>
         </div>

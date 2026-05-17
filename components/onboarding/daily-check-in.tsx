@@ -106,10 +106,16 @@ export function DailyCheckIn({ onComplete }: DailyCheckInProps) {
             </h2>
 
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Choisis un mot ou écris simplement ce qui est là. Il n’y a rien à
-              bien formuler.
+              Choisis un mot ou écris simplement ce qui est là. Tu n’as rien à prouver ici.
             </p>
-
+   <div className="mt-4 rounded-2xl bg-champagne/40 px-4 py-3">
+  <p className="font-serif text-sm leading-relaxed text-foreground">
+    “Répandez vos cœurs en sa présence.”
+  </p>
+  <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-gold">
+    Psaume 62:9
+  </p>
+</div>
             <div className="mt-5 grid grid-cols-2 gap-2">
               {moods.map((mood) => {
                 const isSelected = answer === mood.label

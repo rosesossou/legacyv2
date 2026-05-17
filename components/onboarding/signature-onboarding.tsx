@@ -304,3 +304,11 @@ function BeautyLine({ title, content }: { title: string; content: string }) {
     </div>
   )
 }
+<div className="mt-6 rounded-2xl border border-white/15 bg-white/10 px-4 py-4">
+  <p className="font-serif text-sm leading-relaxed text-white/85">
+    “Venez à moi, vous tous qui êtes fatigués et chargés, et je vous donnerai du repos.”
+  </p>
+  <p className="mt-2 text-[10px] uppercase tracking-[0.25em] text-gold">
+    Matthieu 11:28
+  </p>
+</div>

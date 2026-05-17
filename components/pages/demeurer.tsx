@@ -1,10 +1,22 @@
 "use client"
 
 import { useEffect, useState, type ReactNode } from "react"
-import { CheckCircle2, Heart } from "lucide-react"
+import { CheckCircle2, Heart, Sparkles } from "lucide-react"
 import { addVictory } from "@/lib/progress-store"
 
 const STORAGE_KEY = "signature-demeurer-mvp"
+const ONBOARDING_KEY = "signature-onboarding"
+const DAILY_CHECK_IN_KEY = "signature-daily-check-in"
+
+interface OnboardingData {
+  burden?: string
+  need?: string
+  anchor?: string
+}
+
+interface DailyCheckInData {
+  answer?: string
+}
 
 export function DemeurerPage() {
   const [depot, setDepot] = useState("")
@@ -12,22 +24,45 @@ export function DemeurerPage() {
   const [parole, setParole] = useState("")
   const [priere, setPriere] = useState("")
 
+  const [onboarding, setOnboarding] = useState<OnboardingData | null>(null)
+  const [dailyCheckIn, setDailyCheckIn] = useState<DailyCheckInData | null>(
+    null
+  )
+
   const [saved, setSaved] = useState(false)
 
   useEffect(() => {
     const savedData = localStorage.getItem(STORAGE_KEY)
+    const savedOnboarding = localStorage.getItem(ONBOARDING_KEY)
+    const savedDailyCheckIn = localStorage.getItem(DAILY_CHECK_IN_KEY)
 
-    if (!savedData) return
+    if (savedData) {
+      try {
+        const parsed = JSON.parse(savedData)
 
-    try {
-      const parsed = JSON.parse(savedData)
+        setDepot(parsed.depot ?? "")
+        setRecevoir(parsed.recevoir ?? "")
+        setParole(parsed.parole ?? "")
+        setPriere(parsed.priere ?? "")
+      } catch {
+        localStorage.removeItem(STORAGE_KEY)
+      }
+    }
 
-      setDepot(parsed.depot ?? "")
-      setRecevoir(parsed.recevoir ?? "")
-      setParole(parsed.parole ?? "")
-      setPriere(parsed.priere ?? "")
-    } catch {
-      localStorage.removeItem(STORAGE_KEY)
+    if (savedOnboarding) {
+      try {
+        setOnboarding(JSON.parse(savedOnboarding))
+      } catch {
+        localStorage.removeItem(ONBOARDING_KEY)
+      }
+    }
+
+    if (savedDailyCheckIn) {
+      try {
+        setDailyCheckIn(JSON.parse(savedDailyCheckIn))
+      } catch {
+        localStorage.removeItem(DAILY_CHECK_IN_KEY)
+      }
     }
   }, [])
 
@@ -48,6 +83,9 @@ export function DemeurerPage() {
       setSaved(false)
     }, 2200)
   }
+
+  const hasPersonalContext =
+    onboarding?.anchor || onboarding?.need || dailyCheckIn?.answer
 
   return (
     <div className="flex flex-col pb-8">
@@ -70,6 +108,54 @@ export function DemeurerPage() {
         </p>
       </section>
 
+      {hasPersonalContext && (
+        <section className="px-5 pb-6">
+          <div className="rounded-3xl border border-gold/20 bg-card p-5 shadow-sm">
+            <div className="mb-4 flex items-center gap-2">
+              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
+                <Sparkles className="h-4 w-4" strokeWidth={1.7} />
+              </div>
+
+              <div>
+                <p className="text-xs uppercase tracking-[0.22em] text-gold">
+                  Ton ancrage
+                </p>
+                <h2 className="font-serif text-lg text-foreground">
+                  Tu peux revenir doucement.
+                </h2>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              {onboarding?.anchor && (
+                <PersonalLine
+                  label="Ta phrase"
+                  value={`“${onboarding.anchor}”`}
+                />
+              )}
+
+              {onboarding?.need && (
+                <PersonalLine
+                  label="Ton cœur cherche"
+                  value={onboarding.need}
+                />
+              )}
+
+              {dailyCheckIn?.answer && (
+                <PersonalLine
+                  label="Aujourd’hui, tu arrives"
+                  value={dailyCheckIn.answer}
+                />
+              )}
+            </div>
+
+            <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
+              Tu n’as rien à prouver ici. Une phrase sincère suffit.
+            </p>
+          </div>
+        </section>
+      )}
+
       <section className="px-5 pb-6">
         <div className="rounded-3xl border border-gold/20 bg-champagne/40 p-5">
           <div className="flex items-start gap-3">
@@ -86,6 +172,14 @@ export function DemeurerPage() {
                 Tu n’as rien à prouver ici. Une phrase, un soupir ou une prière
                 simple peuvent déjà être un retour vers Dieu.
               </p>
+              <div className="mt-4 rounded-2xl bg-background/70 px-4 py-3">
+  <p className="font-serif text-sm leading-relaxed text-foreground">
+    “Demeurez en moi, et je demeurerai en vous.”
+  </p>
+  <p className="mt-2 text-[10px] uppercase tracking-[0.22em] text-gold">
+    Jean 15:4
+  </p>
+</div>
             </div>
           </div>
         </div>
@@ -94,7 +188,7 @@ export function DemeurerPage() {
       <section className="px-5 pb-8">
         <div className="space-y-4">
           <FieldGroup
-            title="Ce que je viens déposer devant Dieu"
+            title="Ce que j’apporte à Dieu aujourd’hui"
             description="Nommer simplement ce qui pèse ou occupe mon cœur."
           >
             <Textarea
@@ -105,7 +199,7 @@ export function DemeurerPage() {
           </FieldGroup>
 
           <FieldGroup
-            title="Ce que je veux recevoir de Lui"
+            title="Ce que je désire recevoir de Dieu aujourd’hui"
             description="Paix, clarté, courage, repos, direction…"
           >
             <Textarea
@@ -116,7 +210,7 @@ export function DemeurerPage() {
           </FieldGroup>
 
           <FieldGroup
-            title="Une parole à méditer"
+            title=" La parole que je veux garder"
             description="Un verset, une promesse ou une vérité biblique à garder."
           >
             <Textarea
@@ -127,7 +221,7 @@ export function DemeurerPage() {
           </FieldGroup>
 
           <FieldGroup
-            title="Ma prière simple"
+            title="Ma prière simple pour aujourd’hui"
             description="Quelques mots sincères suffisent."
           >
             <Textarea
@@ -152,6 +246,18 @@ export function DemeurerPage() {
           Ce moment reste dans ton espace personnel.
         </p>
       </section>
+    </div>
+  )
+}
+
+function PersonalLine({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl bg-champagne/40 px-4 py-3">
+      <p className="text-[10px] uppercase tracking-[0.22em] text-gold">
+        {label}
+      </p>
+
+      <p className="mt-1 text-sm leading-relaxed text-foreground">{value}</p>
     </div>
   )
 }
