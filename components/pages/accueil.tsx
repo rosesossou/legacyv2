@@ -9,7 +9,7 @@ import {
   Settings,
 } from "lucide-react"
 import { ProgressCard } from "@/components/progress-card"
-
+import { TodayGuideCard } from "@/components/today-guide-card"
 type TabId =
   | "accueil"
   | "parcours"
@@ -54,7 +54,7 @@ export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
         <div className="mb-2 flex items-center gap-2">
           <span className="h-px w-8 bg-gold" />
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
-            Formation
+            Croissance avec intention
           </span>
           <span className="h-px w-8 bg-gold" />
         </div>
@@ -77,7 +77,7 @@ export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
           onClick={() => onNavigate("demeurer")}
           className="mt-8 flex items-center gap-2 rounded-xl bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-lg shadow-primary/20 transition-all duration-200 hover:shadow-xl hover:shadow-primary/30 active:scale-[0.98]"
         >
-          Commencer mon parcours
+          Commencer doucement
           <ArrowRight className="h-4 w-4" />
         </button>
       </section>
@@ -86,7 +86,9 @@ export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
       <section className="px-5 pb-8">
         <ProgressCard />
       </section>
-
+<section className="px-5 pb-8">
+  <TodayGuideCard />
+</section>
       {/* Feature Cards */}
       <section className="px-5 pb-8">
         <div className="flex flex-col gap-3">
@@ -125,6 +127,8 @@ export function AccueilPage({ onNavigate, onOpenStudio }: AccueilPageProps) {
 
             <p className="font-serif text-base font-medium leading-relaxed tracking-wide text-primary-foreground">
               On ne bâtit pas une vie d’excellence par hasard.
+              <br />
+              Luc 14 : 28 Car, lequel de vous, s'il veut bâtir une tour, ne s'assied d'abord pour calculer la dépense et voir s'il a de quoi la terminer, 29de peur qu'après avoir posé les fondements, il ne puisse l'achever, et que tous ceux qui le verront ne se mettent à le railler,…
             </p>
 
             <span className="mt-2 inline-block font-serif text-3xl text-gold">

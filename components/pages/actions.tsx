@@ -1,11 +1,12 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react"
 import { addVictory } from "@/lib/progress-store"
 import {
   ChevronDown,
   CheckCircle2,
   ImageDown,
+  Heart,
   Sparkles,
   Brain,
   Sun,
@@ -16,88 +17,87 @@ import {
 import { toPng } from "html-to-image"
 
 const domaines = [
-  "Pensees",
+  "Pensées",
   "Foi",
   "Discipline",
   "Finances",
   "Relations",
-  "Sante",
+  "Santé",
   "Organisation",
-  "Education",
+  "Éducation",
   "Projet",
-  "Heritage",
+  "Héritage",
 ]
 
 const fields = [
   {
     key: "intention",
-    label: "Mon intention du mois",
-    placeholder: "Ex: Sortir d'une pensee de peur",
+    label: "Ce que je veux vivre avec Dieu dans ce domaine",
+    placeholder: "Ex: avancer avec moins de peur, plus de paix, plus de fidélité...",
   },
   {
     key: "femme",
-    label: "La femme que je veux devenir dans ce domaine",
-    placeholder: "Ex: Une femme libre et ancree dans la verite",
+    label: "La femme que je sens que Dieu forme en moi",
+    placeholder: "Ex: une femme stable, fidèle, paisible, courageuse...",
   },
   {
     key: "action",
-    label: "Ma petite action de la semaine",
-    placeholder: "Ex: Ecrire une verite chaque matin",
+    label: "Mon petit pas fidèle",
+    placeholder: "Ex: écrire une vérité chaque matin, ranger un espace, appeler une personne...",
   },
   {
     key: "declencheur",
-    label: "Je vais le faire apres...",
-    placeholder: "Ex: Apres ma priere du matin",
+    label: "Je vais le faire après...",
+    placeholder: "Ex: ma prière du matin, le dîner, ma douche, avant de dormir...",
   },
   {
     key: "blocage",
-    label: "Ce qui pourrait me bloquer",
-    placeholder: "Ex: La fatigue, le manque de temps",
+    label: "Ce qui pourrait me ralentir",
+    placeholder: "Ex: fatigue, peur, oubli, perfectionnisme...",
   },
   {
     key: "simplifier",
-    label: "Comment je peux simplifier",
-    placeholder: "Ex: Preparer mon carnet la veille",
+    label: "Comment je peux rendre ce pas plus simple",
+    placeholder: "Ex: le réduire à 5 minutes, préparer la veille, commencer petit...",
   },
   {
     key: "remise",
-    label: "Ce que je remets a Dieu",
-    placeholder: "Ex: Mon besoin de controle",
+    label: "Ce que je remets à Dieu",
+    placeholder: "Ex: mon besoin de contrôle, ma peur d’échouer, mon impatience...",
   },
   {
     key: "avant",
     label: "Avant, j’étais / je faisais...",
-    placeholder: "Ex: Je repoussais toujours ce petit pas",
+    placeholder: "Ex: je repoussais souvent ce petit pas...",
   },
   {
     key: "maintenant",
     label: "Maintenant, je remarque que...",
-    placeholder:
-      "Ex: J’arrive à poser une action simple sans attendre d’être prête",
+    placeholder: "Ex: j’arrive à avancer même doucement...",
   },
   {
     key: "victoire",
     label: "Ma victoire à célébrer",
-    placeholder: "Ex: J’ai été fidèle à mon engagement cette semaine",
+    placeholder: "Ex: j’ai été fidèle à mon engagement cette semaine...",
   },
 ]
 
 const examples = [
   {
-    domaine: "Pensees",
-    intention: "Sortir d'une pensee de peur",
-    action: "Ecrire une verite chaque matin",
-    declencheur: "Apres ma priere",
+    domaine: "Pensées",
+    intention: "Sortir d’une pensée de peur",
+    action: "Écrire une vérité chaque matin",
+    declencheur: "Après ma prière",
   },
   {
     domaine: "Finances",
-    intention: "Gerer mes ressources avec sagesse",
-    action: "Noter une depense par jour",
-    declencheur: "Apres le diner",
+    intention: "Gérer mes ressources avec sagesse",
+    action: "Noter une dépense par jour",
+    declencheur: "Après le dîner",
   },
   {
-    domaine: "Education",
-    intention: "Devenir une femme qui apprend avec discipline",
+    domaine: "Éducation",
+    intention: "Apprendre avec discipline",
     action: "Lire 2 pages par jour",
     declencheur: "Avant de dormir",
   },
@@ -106,8 +106,8 @@ const examples = [
 const signatureItems = [
   {
     icon: Brain,
-    label: "Mes pensees a transformer",
-    value: "Identifier et remplacer les pensees limitantes",
+    label: "Mes pensées à transformer",
+    value: "Identifier et remplacer les pensées limitantes",
   },
   {
     icon: Sun,
@@ -117,7 +117,7 @@ const signatureItems = [
   {
     icon: Sparkles,
     label: "La femme que je deviens",
-    value: "Intentionnelle, disciplinee, batisseuse",
+    value: "Intentionnelle, disciplinée, bâtisseuse",
   },
   {
     icon: Compass,
@@ -127,11 +127,11 @@ const signatureItems = [
   {
     icon: Footprints,
     label: "Mon petit pas de la semaine",
-    value: "Ecrire une verite chaque matin",
+    value: "Écrire une vérité chaque matin",
   },
   {
     icon: Building2,
-    label: "L'heritage que je veux construire",
+    label: "L’héritage que je veux construire",
     value: "Transmettre la sagesse et la foi",
   },
 ]
@@ -180,7 +180,7 @@ export function ActionsPage() {
     addVictory("action_saved")
 
     setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 2000)
+    setTimeout(() => setSubmitted(false), 2200)
   }
 
   async function handleExportImage() {
@@ -217,17 +217,21 @@ export function ActionsPage() {
 
   const declencheur = answers.declencheur || "Après mon temps avec Dieu."
 
+  const simplifier =
+    answers.simplifier || "Je rends ce petit pas plus simple pour pouvoir le tenir."
+
   const remise =
     answers.remise || "Je remets au Seigneur mon besoin de tout contrôler."
 
   const avant =
-    answers.avant || "Je partais souvent dans l’élan, sans mesurer ma progression."
+    answers.avant || "Avant, j’avançais parfois sans voir mes progrès."
 
   const maintenant =
-    answers.maintenant || "Je vois que Dieu m’apprend à avancer avec fidélité."
+    answers.maintenant ||
+    "Maintenant, je remarque que Dieu m’apprend à avancer doucement."
 
   const victoire =
-    answers.victoire || "Je célèbre un petit pas posé avec intention."
+    answers.victoire || "Je célèbre un petit pas posé avec fidélité."
 
   return (
     <div className="flex flex-col px-5 pt-12 pb-8">
@@ -235,22 +239,42 @@ export function ActionsPage() {
         <span className="h-px w-6 bg-gold" />
 
         <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
-          Passer a l&apos;action
+          Actions
         </span>
       </div>
 
       <h1 className="font-serif text-2xl font-bold text-foreground">
-        Mes petits pas
+        Poser un petit pas
       </h1>
 
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        Transformer l&apos;inspiration et la reflexion en comportement.
+        Tu n’as pas besoin de tout changer aujourd’hui. Choisis un pas simple,
+        réaliste, fidèle. Dieu travaille aussi dans les petites obéissances.
       </p>
+
+      <div className="mt-6 rounded-3xl border border-gold/20 bg-champagne/40 p-5 shadow-sm">
+        <div className="flex items-start gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <Heart className="h-5 w-5" />
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Petit rappel
+            </p>
+
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              Ce n’est pas la taille du pas qui compte, c’est la fidélité avec
+              laquelle tu avances.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <div className="mt-8 flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <label className="text-xs font-medium text-foreground">
-            Domaine prioritaire
+            Domaine où je veux avancer doucement
           </label>
 
           <div className="relative">
@@ -323,12 +347,18 @@ export function ActionsPage() {
           {submitted ? (
             <>
               <CheckCircle2 className="h-4 w-4" />
-              Petit pas enregistré · +15 points
+              Petit pas gardé · +15 points
             </>
           ) : (
-            "Choisir mon petit pas"
+            "Garder mon petit pas"
           )}
         </button>
+
+        {submitted && (
+          <p className="text-center text-sm text-muted-foreground">
+            Victoire célébrée. Tu avances, même doucement.
+          </p>
+        )}
       </div>
 
       <div className="mt-10">
@@ -341,7 +371,7 @@ export function ActionsPage() {
               showExamples ? "rotate-180" : ""
             }`}
           />
-          Voir des exemples
+          Voir des exemples doux
         </button>
 
         {showExamples && (
@@ -364,7 +394,7 @@ export function ActionsPage() {
                 </p>
 
                 <p className="text-[11px] text-muted-foreground">
-                  Declencheur : {ex.declencheur}
+                  Déclencheur : {ex.declencheur}
                 </p>
               </div>
             ))}
@@ -377,7 +407,7 @@ export function ActionsPage() {
           <span className="h-px w-6 bg-gold" />
 
           <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
-            Synthese
+            Synthèse
           </span>
         </div>
 
@@ -425,7 +455,7 @@ export function ActionsPage() {
           </h2>
 
           <p className="mt-2 text-sm text-muted-foreground">
-            Cette image reprend ton petit pas, ton avant/après et ta victoire.
+            Une image pour célébrer ton petit pas et voir ton avant/après.
           </p>
         </div>
 
@@ -449,6 +479,7 @@ export function ActionsPage() {
             <CardBlock title="Avant" text={avant} />
             <CardBlock title="Maintenant" text={maintenant} />
             <CardBlock title="Ma victoire" text={victoire} />
+            <CardBlock title="Je simplifie en..." text={simplifier} />
             <CardBlock title="Ce que je remets à Dieu" text={remise} />
           </SignatureCard>
         </div>
@@ -459,9 +490,7 @@ export function ActionsPage() {
           className="flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card py-3.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-200 hover:border-gold/40 hover:shadow-md active:scale-[0.98] disabled:opacity-60"
         >
           <ImageDown className="h-4 w-4" />
-          {exporting
-            ? "Exportation..."
-            : "Exporter mes actions en image · +5 points"}
+          {exporting ? "Exportation..." : "Exporter ma carte Actions · +5 points"}
         </button>
       </div>
     </div>
@@ -472,15 +501,15 @@ function SignatureCard({
   refElement,
   children,
 }: {
-  refElement: React.RefObject<HTMLDivElement | null>
-  children: React.ReactNode
+  refElement: RefObject<HTMLDivElement | null>
+  children: ReactNode
 }) {
   return (
     <div
       ref={refElement}
       style={{
         width: "360px",
-        minHeight: "720px",
+        minHeight: "740px",
         background:
           "linear-gradient(145deg, #2b102f 0%, #5c1835 48%, #b9824b 100%)",
         color: "white",
@@ -506,13 +535,26 @@ function SignatureCard({
 
       <div
         style={{
-          minHeight: "676px",
+          position: "absolute",
+          bottom: "-100px",
+          left: "-80px",
+          width: "240px",
+          height: "240px",
+          borderRadius: "999px",
+          background: "rgba(255, 255, 255, 0.12)",
+          filter: "blur(14px)",
+        }}
+      />
+
+      <div
+        style={{
+          minHeight: "696px",
           border: "1px solid rgba(255,255,255,0.22)",
           borderRadius: "26px",
           padding: "24px",
           display: "flex",
           flexDirection: "column",
-          gap: "20px",
+          gap: "18px",
           position: "relative",
           zIndex: 2,
           background: "rgba(0,0,0,0.14)",

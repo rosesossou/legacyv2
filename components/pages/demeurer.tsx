@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { Sparkles, Save, ImageDown } from "lucide-react"
+import { Heart, ImageDown, Save, Sparkles } from "lucide-react"
 import { toPng } from "html-to-image"
 import { addVictory } from "@/lib/progress-store"
 
@@ -92,69 +92,100 @@ export function DemeurerPage() {
         </p>
 
         <h1 className="text-4xl font-serif leading-tight">
-          Revenir à la Source
+          Revenir doucement à Dieu
         </h1>
 
         <p className="text-muted-foreground leading-relaxed">
-          Un espace pour revenir à la présence du Seigneur, examiner ton cœur,
-          écouter ce que Dieu travaille en toi et poser un petit pas
-          d’obéissance.
+          Tu n’as pas besoin de tout remplir aujourd’hui. Viens comme tu es.
+          Une phrase, une prière, un petit pas fidèle suffisent.
+        </p>
+      </section>
+
+      <section className="rounded-3xl border border-gold/20 bg-champagne/40 p-5 shadow-sm space-y-4">
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <Heart className="h-5 w-5" />
+          </div>
+
+          <div>
+            <p className="text-sm uppercase tracking-[0.25em] text-gold">
+              Invitation du jour
+            </p>
+
+            <h2 className="text-2xl font-serif leading-relaxed">
+              Respire. Tu n’es pas en retard.
+            </h2>
+          </div>
+        </div>
+
+        <p className="text-sm leading-relaxed text-muted-foreground">
+          Le but n’est pas de performer spirituellement. Le but est de revenir
+          à la Source, d’écouter Dieu et de Lui laisser former ton cœur.
         </p>
       </section>
 
       <section className="rounded-3xl bg-primary/10 p-5 space-y-3">
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <Sparkles className="h-5 w-5" />
-          </div>
+        <p className="text-sm uppercase tracking-[0.25em] text-primary">
+          Parole à garder
+        </p>
 
-          <div>
-            <p className="text-sm uppercase tracking-[0.25em] text-primary">
-              Pensée centrale
-            </p>
+        <p className="text-xl font-serif leading-relaxed">
+          “Demeurez en moi, et je demeurerai en vous.”
+        </p>
 
-            <h2 className="text-2xl font-serif leading-relaxed">
-              Je ne peux pas porter du fruit loin de la présence du Seigneur.
-            </h2>
-          </div>
-        </div>
+        <p className="text-sm text-muted-foreground">Jean 15:4</p>
       </section>
 
       <section className="rounded-[2rem] border bg-card p-5 shadow-sm space-y-6">
+        <div className="space-y-2">
+          <h2 className="text-2xl font-serif">Mon moment avec Dieu</h2>
+
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Réponds seulement à ce qui te parle aujourd’hui. Tu peux revenir
+            plus tard.
+          </p>
+        </div>
+
         <ReflectionField
-          label="Où en est ma relation avec le Seigneur en ce moment ?"
+          label="Seigneur, aujourd’hui je viens avec..."
           value={relation}
           onChange={setRelation}
+          placeholder="Ex: un cœur fatigué, reconnaissant, confus, disponible..."
         />
 
         <ReflectionField
-          label="Qu’est-ce qui occupe mon cœur et mes pensées actuellement ?"
+          label="Ce qui occupe mon cœur en ce moment"
           value={coeur}
           onChange={setCoeur}
+          placeholder="Ex: une inquiétude, une attente, une joie, une question..."
         />
 
         <ReflectionField
-          label="Qu’est-ce que Dieu forme, révèle ou renouvelle en moi ?"
+          label="Ce que je sens que Dieu forme ou révèle en moi"
           value={revelation}
           onChange={setRevelation}
+          placeholder="Ex: la patience, la confiance, le pardon, la paix..."
         />
 
         <ReflectionField
-          label="Quelle vérité biblique dois-je garder cette semaine ?"
+          label="La vérité que je veux garder cette semaine"
           value={verite}
           onChange={setVerite}
+          placeholder="Ex: Dieu est avec moi. Je peux avancer doucement."
         />
 
         <ReflectionField
-          label="Quel petit pas d’obéissance puis-je poser cette semaine ?"
+          label="Mon petit pas d’obéissance"
           value={obeissance}
           onChange={setObeissance}
+          placeholder="Ex: prier 5 minutes, envoyer un message, demander pardon..."
         />
 
         <ReflectionField
-          label="Ma prière"
+          label="Ma prière simple"
           value={priere}
           onChange={setPriere}
+          placeholder="Seigneur, aide-moi à demeurer en Toi..."
         />
 
         <button
@@ -162,8 +193,14 @@ export function DemeurerPage() {
           className="flex w-full items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-4 font-medium text-primary-foreground"
         >
           <Save className="h-4 w-4" />
-          {saved ? "Réflexion enregistrée · +10 points" : "Enregistrer ma réflexion"}
+          {saved ? "C’est gardé · +10 points" : "Garder ce moment"}
         </button>
+
+        {saved && (
+          <p className="text-center text-sm text-muted-foreground">
+            Petit pas célébré. Tu avances, même doucement.
+          </p>
+        )}
       </section>
 
       <section className="space-y-4">
@@ -177,7 +214,7 @@ export function DemeurerPage() {
           </h2>
 
           <p className="text-sm text-muted-foreground leading-relaxed">
-            Cette carte reprend ta réflexion et peut être exportée comme image.
+            Une image douce à garder, partager ou relire dans la semaine.
           </p>
         </div>
 
@@ -186,7 +223,7 @@ export function DemeurerPage() {
             ref={cardRef}
             style={{
               width: "360px",
-              minHeight: "640px",
+              minHeight: "680px",
               background:
                 "linear-gradient(145deg, #2b102f 0%, #5c1835 48%, #b9824b 100%)",
               color: "white",
@@ -225,13 +262,13 @@ export function DemeurerPage() {
 
             <div
               style={{
-                minHeight: "596px",
+                minHeight: "636px",
                 border: "1px solid rgba(255,255,255,0.22)",
                 borderRadius: "26px",
                 padding: "24px",
                 display: "flex",
                 flexDirection: "column",
-                gap: "24px",
+                gap: "22px",
                 position: "relative",
                 zIndex: 2,
                 background: "rgba(0,0,0,0.14)",
@@ -273,7 +310,7 @@ export function DemeurerPage() {
                     color: "#fff7e6",
                   }}
                 >
-                  Revenir à la Source
+                  Revenir doucement à Dieu
                 </h2>
 
                 <div
@@ -306,16 +343,21 @@ export function DemeurerPage() {
               </div>
 
               <CardBlock
+                title="Aujourd’hui je viens avec"
+                text={relation || "Un cœur que Dieu peut accueillir."}
+              />
+
+              <CardBlock
+                title="Ce que je dépose"
+                text={coeur || "Je dépose mes pensées devant le Seigneur."}
+              />
+
+              <CardBlock
                 title="Ce que Dieu forme en moi"
                 text={
                   revelation ||
                   "Une intimité sincère, une écoute plus profonde et un cœur disponible."
                 }
-              />
-
-              <CardBlock
-                title="Mon cœur en ce moment"
-                text={coeur || "Je dépose mes pensées devant le Seigneur."}
               />
 
               <CardBlock
@@ -327,15 +369,15 @@ export function DemeurerPage() {
               />
 
               <CardBlock
-                title="Mon pas d’obéissance"
+                title="Mon petit pas fidèle"
                 text={obeissance || "Chaque matin : Seigneur, me voici."}
               />
 
               <CardBlock
-                title="Prière"
+                title="Ma prière"
                 text={
                   priere ||
-                  "Seigneur, apprends-moi à demeurer avant d’agir et à briller uniquement pour révéler Ta lumière."
+                  "Seigneur, apprends-moi à demeurer avant d’agir."
                 }
               />
             </div>
@@ -348,9 +390,7 @@ export function DemeurerPage() {
           className="flex w-full items-center justify-center gap-2 rounded-2xl border border-border bg-card px-5 py-4 font-medium text-foreground disabled:opacity-60"
         >
           <ImageDown className="h-4 w-4" />
-          {exporting
-            ? "Exportation..."
-            : "Exporter ma carte en image · +5 points"}
+          {exporting ? "Exportation..." : "Exporter ma carte · +5 points"}
         </button>
       </section>
     </div>
@@ -361,10 +401,12 @@ function ReflectionField({
   label,
   value,
   onChange,
+  placeholder,
 }: {
   label: string
   value: string
   onChange: (value: string) => void
+  placeholder: string
 }) {
   return (
     <div className="space-y-2">
@@ -375,8 +417,8 @@ function ReflectionField({
       <textarea
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="min-h-28 w-full rounded-2xl border bg-background p-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
-        placeholder="Écris ici..."
+        className="min-h-24 w-full rounded-2xl border bg-background p-4 text-sm outline-none focus:ring-2 focus:ring-primary/30"
+        placeholder={placeholder}
       />
     </div>
   )

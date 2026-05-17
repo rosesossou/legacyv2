@@ -1,14 +1,15 @@
 "use client"
-import { addVictory } from "@/lib/progress-store"
-import { useEffect, useRef, useState } from "react"
+
+import { useEffect, useRef, useState, type ReactNode, type RefObject } from "react"
 import {
   Save,
   ChevronDown,
   ChevronUp,
   ImageDown,
-  Sparkles,
+  Heart,
 } from "lucide-react"
 import { toPng } from "html-to-image"
+import { addVictory } from "@/lib/progress-store"
 
 const wordChips = [
   "Sage",
@@ -27,55 +28,59 @@ const wordChips = [
   "Batisseuse",
 ]
 
-const questions = [
+const sections = [
   {
     id: "pensees",
     number: "01",
-    title: "Mes pensees actuelles",
+    title: "Ce que je porte",
+    subtitle: "Déposer mes pensées sans me juger.",
     defaultOpen: true,
     fields: [
-      "Quelles pensees reviennent souvent en moi en ce moment ?",
-      "Qu'est-ce qui me pese ?",
-      "Quelle peur influence mes decisions ?",
-      "Quelle croyance dois-je deconstruire ?",
-      "Quelle verite dois-je commencer a croire ?",
+      "Quelles pensées reviennent souvent en moi en ce moment ?",
+      "Qu’est-ce qui me pèse ?",
+      "Quelle peur influence mes décisions ?",
+      "Quelle croyance ai-je besoin de déposer ?",
+      "Quelle vérité ai-je besoin de recevoir ?",
     ],
   },
   {
     id: "saison",
     number: "02",
     title: "Ma saison avec Dieu",
+    subtitle: "Comprendre ce que Dieu travaille doucement en moi.",
     fields: [
       "Dans quelle saison spirituelle je me trouve ?",
-      "Qu'est-ce que Dieu travaille dans mon caractere ?",
-      "Qu'est-ce que Dieu m'invite a deposer ?",
-      "Qu'est-ce que Dieu m'invite a construire ?",
-      "Quelle obeissance simple puis-je poser cette semaine ?",
-      "Ce que je remets a Dieu :",
+      "Qu’est-ce que Dieu travaille dans mon caractère ?",
+      "Qu’est-ce que Dieu m’invite à déposer ?",
+      "Qu’est-ce que Dieu m’invite à construire ?",
+      "Quelle obéissance simple puis-je poser cette semaine ?",
+      "Ce que je remets à Dieu :",
     ],
   },
   {
     id: "femme",
     number: "03",
     title: "La femme que je deviens",
+    subtitle: "Nommer ce que Dieu forme en moi.",
     fields: [
       "Je deviens une femme qui...",
       "Je veux grandir en...",
-      "Je veux arreter de...",
-      "Je veux apprendre a...",
-      "Je veux mieux gerer...",
+      "Je veux arrêter de...",
+      "Je veux apprendre à...",
+      "Je veux mieux gérer...",
     ],
   },
   {
     id: "heritage",
     number: "04",
-    title: "Mon heritage",
+    title: "Ce que je construis",
+    subtitle: "Regarder plus loin que le moment présent.",
     fields: [
       "Quelle trace je veux laisser ?",
-      "Qu'est-ce que je veux transmettre ?",
-      "Quelle generation je veux contribuer a batir ?",
+      "Qu’est-ce que je veux transmettre ?",
+      "Quelle génération je veux contribuer à bâtir ?",
       "Quelles valeurs je veux incarner ?",
-      "Si ma vie avait une signature, qu'est-ce qu'elle dirait ?",
+      "Si ma vie avait une signature, qu’est-ce qu’elle dirait ?",
     ],
   },
 ]
@@ -95,6 +100,7 @@ export function CarnetPage() {
 
     try {
       const parsed = JSON.parse(savedCarnet)
+
       setAnswers(parsed.answers || {})
       setSelectedWords(parsed.selectedWords || [])
     } catch {
@@ -128,9 +134,11 @@ export function CarnetPage() {
         createdAt: new Date().toISOString(),
       })
     )
+
     addVictory("reflection_saved")
+
     setSaved(true)
-    setTimeout(() => setSaved(false), 2000)
+    setTimeout(() => setSaved(false), 2200)
   }
 
   async function handleExportImage() {
@@ -149,8 +157,8 @@ export function CarnetPage() {
       link.download = "mon-carnet-signature.png"
       link.href = dataUrl
       link.click()
-      
-       addVictory("image_exported")
+
+      addVictory("image_exported")
     } catch (error) {
       console.error(error)
       alert("Impossible d’exporter le carnet en image.")
@@ -160,21 +168,21 @@ export function CarnetPage() {
   }
 
   const mainThought =
-    answers["Quelle verite dois-je commencer a croire ?"] ||
-    answers["Quelles pensees reviennent souvent en moi en ce moment ?"] ||
-    "Je choisis de déposer mes pensées devant Dieu."
+    answers["Quelle vérité ai-je besoin de recevoir ?"] ||
+    answers["Quelles pensées reviennent souvent en moi en ce moment ?"] ||
+    "Je peux déposer mes pensées devant Dieu, sans peur et sans honte."
 
   const season =
     answers["Dans quelle saison spirituelle je me trouve ?"] ||
-    answers["Qu'est-ce que Dieu travaille dans mon caractere ?"] ||
-    "Une saison de construction intérieure."
+    answers["Qu’est-ce que Dieu travaille dans mon caractère ?"] ||
+    "Une saison où Dieu construit doucement mon cœur."
 
   const becoming =
     answers["Je deviens une femme qui..."] ||
-    "Je deviens une femme bâtie avec Dieu, sagesse et intention."
+    "Je deviens une femme enracinée, paisible et intentionnelle."
 
   const legacy =
-    answers["Si ma vie avait une signature, qu'est-ce qu'elle dirait ?"] ||
+    answers["Si ma vie avait une signature, qu’est-ce qu’elle dirait ?"] ||
     answers["Quelle trace je veux laisser ?"] ||
     "Une vie qui laisse une trace de foi, de sagesse et d’amour."
 
@@ -182,24 +190,46 @@ export function CarnetPage() {
     <div className="flex flex-col px-5 pt-12 pb-8">
       <div className="mb-1 flex items-center gap-2">
         <span className="h-px w-6 bg-gold" />
+
         <span className="text-xs font-medium uppercase tracking-[0.2em] text-gold">
-          Reflexion guidee
+          Carnet
         </span>
       </div>
 
       <h1 className="font-serif text-2xl font-bold text-foreground">
-        Mon carnet Signature
+        Déposer ce que je porte
       </h1>
 
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-        Un espace pour ralentir, examiner et ecrire ce qui compte.
+        Ce carnet n’est pas là pour te juger. Il est là pour t’aider à voir
+        clair, une phrase à la fois.
       </p>
 
+      <div className="mt-6 rounded-3xl border border-gold/20 bg-champagne/40 p-5 shadow-sm">
+        <div className="flex items-start gap-3">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+            <Heart className="h-5 w-5" />
+          </div>
+
+          <div>
+            <p className="text-sm font-semibold text-foreground">
+              Petit rappel
+            </p>
+
+            <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+              Tu n’as pas besoin de tout remplir aujourd’hui. Écris seulement ce
+              qui te parle maintenant.
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="mt-8 flex flex-col gap-3">
-        {questions.map((section) => (
+        {sections.map((section) => (
           <Section
             key={section.id}
             title={section.title}
+            subtitle={section.subtitle}
             number={section.number}
             defaultOpen={section.defaultOpen}
           >
@@ -216,11 +246,11 @@ export function CarnetPage() {
               {section.id === "femme" && (
                 <div className="flex flex-col gap-2">
                   <label className="text-xs font-medium text-foreground">
-                    Trois mots qui decrivent la femme que je veux devenir
+                    Trois mots pour la femme que Dieu forme en moi
                   </label>
 
                   <p className="text-[10px] text-muted-foreground">
-                    {selectedWords.length}/3 selectionnes
+                    {selectedWords.length}/3 sélectionnés
                   </p>
 
                   <div className="flex flex-wrap gap-2">
@@ -259,19 +289,27 @@ export function CarnetPage() {
         }`}
       >
         <Save className="h-4 w-4" />
-        {saved ? "Reflexion enregistree" : "Enregistrer ma reflexion"}
+        {saved ? "Carnet gardé · +10 points" : "Garder mon carnet"}
       </button>
+
+      {saved && (
+        <p className="mt-3 text-center text-sm text-muted-foreground">
+          C’est gardé. Un petit pas de clarté compte aussi.
+        </p>
+      )}
 
       <div className="mt-10 space-y-4">
         <div>
           <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground">
             Carte
           </p>
+
           <h2 className="mt-2 font-serif text-2xl font-bold text-foreground">
             Ma carte Carnet
           </h2>
+
           <p className="mt-2 text-sm text-muted-foreground">
-            Cette image reprend la synthese de ton carnet.
+            Une image douce pour relire ce que Dieu forme en toi.
           </p>
         </div>
 
@@ -284,18 +322,20 @@ export function CarnetPage() {
               reference="Proverbes 4:23"
             />
 
-            <CardBlock title="Mes pensées actuelles" text={mainThought} />
+            <CardBlock title="Ce que je dépose" text={mainThought} />
             <CardBlock title="Ma saison avec Dieu" text={season} />
             <CardBlock title="La femme que je deviens" text={becoming} />
+
             <CardBlock
               title="Trois mots"
               text={
                 selectedWords.length > 0
                   ? selectedWords.join(" · ")
-                  : "Sage · Stable · Intentionnelle"
+                  : "Paisible · Stable · Intentionnelle"
               }
             />
-            <CardBlock title="Mon héritage" text={legacy} />
+
+            <CardBlock title="Ce que je construis" text={legacy} />
           </SignatureCard>
         </div>
 
@@ -305,7 +345,7 @@ export function CarnetPage() {
           className="flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-card py-3.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-200 hover:border-gold/40 hover:shadow-md active:scale-[0.98] disabled:opacity-60"
         >
           <ImageDown className="h-4 w-4" />
-          {exporting ? "Exportation..." : "Exporter mon carnet en image"}
+          {exporting ? "Exportation..." : "Exporter mon carnet · +5 points"}
         </button>
       </div>
     </div>
@@ -314,14 +354,16 @@ export function CarnetPage() {
 
 function Section({
   title,
+  subtitle,
   number,
   defaultOpen = false,
   children,
 }: {
   title: string
+  subtitle: string
   number: string
   defaultOpen?: boolean
-  children: React.ReactNode
+  children: ReactNode
 }) {
   const [open, setOpen] = useState(defaultOpen)
 
@@ -332,20 +374,26 @@ function Section({
         className="flex w-full items-center justify-between p-5"
         aria-expanded={open}
       >
-        <div className="flex items-center gap-3">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-secondary text-[10px] font-bold text-plum">
+        <div className="flex items-start gap-3 text-left">
+          <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-secondary text-[10px] font-bold text-plum">
             {number}
           </span>
 
-          <h3 className="font-serif text-sm font-semibold text-foreground text-left">
-            {title}
-          </h3>
+          <div>
+            <h3 className="font-serif text-sm font-semibold text-foreground">
+              {title}
+            </h3>
+
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+              {subtitle}
+            </p>
+          </div>
         </div>
 
         {open ? (
-          <ChevronUp className="h-4 w-4 text-muted-foreground" />
+          <ChevronUp className="h-4 w-4 shrink-0 text-muted-foreground" />
         ) : (
-          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          <ChevronDown className="h-4 w-4 shrink-0 text-muted-foreground" />
         )}
       </button>
 
@@ -373,7 +421,7 @@ function QuestionField({
         rows={2}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        placeholder="Ecris ici..."
+        placeholder="Écris une phrase, même courte..."
         className="resize-none rounded-xl border border-input bg-background px-3 py-2.5 text-xs leading-relaxed text-foreground placeholder:text-muted-foreground/50 focus:border-gold focus:ring-1 focus:ring-gold/30 focus:outline-none transition-all duration-200"
       />
     </div>
@@ -384,15 +432,15 @@ function SignatureCard({
   refElement,
   children,
 }: {
-  refElement: React.RefObject<HTMLDivElement | null>
-  children: React.ReactNode
+  refElement: RefObject<HTMLDivElement | null>
+  children: ReactNode
 }) {
   return (
     <div
       ref={refElement}
       style={{
         width: "360px",
-        minHeight: "640px",
+        minHeight: "660px",
         background:
           "linear-gradient(145deg, #2b102f 0%, #5c1835 48%, #b9824b 100%)",
         color: "white",
@@ -418,7 +466,20 @@ function SignatureCard({
 
       <div
         style={{
-          minHeight: "596px",
+          position: "absolute",
+          bottom: "-100px",
+          left: "-80px",
+          width: "240px",
+          height: "240px",
+          borderRadius: "999px",
+          background: "rgba(255, 255, 255, 0.12)",
+          filter: "blur(14px)",
+        }}
+      />
+
+      <div
+        style={{
+          minHeight: "616px",
           border: "1px solid rgba(255,255,255,0.22)",
           borderRadius: "26px",
           padding: "24px",
@@ -508,6 +569,7 @@ function CardHeader({
       >
         “{verse}”
         <br />
+
         <span style={{ color: "#f4d994", fontStyle: "normal" }}>
           {reference}
         </span>

@@ -13,10 +13,11 @@ import { cn } from "@/lib/utils"
 const tabs = [
   { id: "accueil", label: "Accueil", icon: Home },
   { id: "demeurer", label: "Demeurer", icon: Sparkles },
-  { id: "parcours", label: "Briller", icon: Compass },
-  { id: "enseignement", label: "Enseigner", icon: BookOpen },
-  { id: "carnet", label: "Carnet", icon: NotebookPen },
+   { id: "carnet", label: "Carnet", icon: NotebookPen },
   { id: "actions", label: "Actions", icon: Footprints },
+  { id: "parcours", label: "Briller", icon: Compass },
+  { id: "enseignement", label: "Ressources", icon: BookOpen },
+ 
 ] as const
 
 export type TabId = (typeof tabs)[number]["id"]

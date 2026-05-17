@@ -1,8 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Trophy, Sparkles } from "lucide-react"
-import { getSignatureProgress, type SignatureProgress } from "@/lib/progress-store"
+import { Sparkles, Trophy } from "lucide-react"
+import {
+  getSignatureProgress,
+  type SignatureProgress,
+} from "@/lib/progress-store"
 
 export function ProgressCard() {
   const [progress, setProgress] = useState<SignatureProgress>({
@@ -27,8 +30,10 @@ export function ProgressCard() {
   const level = Math.floor(progress.points / 50) + 1
   const nextLevelPoints = level * 50
   const currentLevelStart = (level - 1) * 50
+
   const progressPercent =
-    ((progress.points - currentLevelStart) / (nextLevelPoints - currentLevelStart)) *
+    ((progress.points - currentLevelStart) /
+      (nextLevelPoints - currentLevelStart)) *
     100
 
   const lastVictory = progress.victories[0]
@@ -42,18 +47,26 @@ export function ProgressCard() {
 
         <div>
           <p className="text-sm uppercase tracking-[0.25em] text-muted-foreground">
-            Mes victoires
+            Mes petits pas célébrés
           </p>
 
           <h2 className="text-2xl font-serif">
-            {progress.points} points
+            {progress.points === 0
+              ? "Chaque pas compte"
+              : `${progress.points} points de fidélité`}
           </h2>
         </div>
       </div>
 
+      <p className="text-sm leading-relaxed text-muted-foreground">
+        Ce n’est pas une course. C’est une manière de reconnaître les petits pas
+        que tu poses avec Dieu.
+      </p>
+
       <div className="rounded-2xl bg-background p-4 space-y-3">
         <div className="flex items-center justify-between text-sm">
           <span className="font-medium">Niveau {level}</span>
+
           <span className="text-muted-foreground">
             {progress.points}/{nextLevelPoints}
           </span>
@@ -71,19 +84,24 @@ export function ProgressCard() {
         <div className="rounded-2xl border border-gold/30 bg-champagne/40 p-4">
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" />
+
             <p className="text-sm font-semibold text-foreground">
-              Dernière victoire
+              Dernière petite victoire
             </p>
           </div>
 
           <p className="mt-2 text-sm text-muted-foreground">
             {lastVictory.label} · +{lastVictory.points} points
           </p>
+
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+            Tu avances, même doucement.
+          </p>
         </div>
       ) : (
         <p className="text-sm text-muted-foreground leading-relaxed">
           Tes victoires apparaîtront ici quand tu enregistreras une réflexion,
-          un petit pas ou une carte.
+          choisiras un petit pas ou exporteras une carte.
         </p>
       )}
     </section>
