@@ -38,8 +38,8 @@ export function AccueilPage({ onNavigate }: AccueilPageProps) {
         </p>
 
         <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
-          Revenir à Dieu. Déposer ce que tu portes. Avancer par petits pas,
-          sans pression ni comparaison.
+          Signature t’aide à clarifier ton esprit, revenir à Dieu et poser un petit pas
+  juste pour aujourd’hui.
         </p>
 
         <button

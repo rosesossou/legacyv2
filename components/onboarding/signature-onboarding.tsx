@@ -91,7 +91,7 @@ export function SignatureOnboarding({ onComplete }: SignatureOnboardingProps) {
 
 <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
   Signature t’aide à clarifier ton esprit, déposer ce qui pèse et poser un
-  petit pas avec Dieu. Une phrase suffit pour commencer.
+  petit pas concret. Une phrase suffit pour commencer.
 </p>
         </div>
 
