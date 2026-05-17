@@ -8,7 +8,7 @@ const STORAGE_KEY = "signature-daily-check-in"
 const moods = [
   {
     label: "Fatiguée",
-    emoji: "🥱",
+    emoji: "😴",
     selected: "border-amber-300 bg-amber-50 text-amber-900",
   },
   {
