@@ -26,7 +26,7 @@ export function SignatureDownloadCard({
   reference,
   lines,
   fileName,
-  buttonLabel = "Télécharger ma carte",
+  buttonLabel = "Voir / télécharger ma carte",
 }: SignatureDownloadCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const [isDownloading, setIsDownloading] = useState(false)
@@ -43,12 +43,86 @@ export function SignatureDownloadCard({
         backgroundColor: "#2b0b35",
       })
 
+      const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+
+      if (isMobile) {
+        const imageWindow = window.open()
+
+        if (imageWindow) {
+          imageWindow.document.write(`
+            <html>
+              <head>
+                <title>Ma carte Signature</title>
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <style>
+                  body {
+                    margin: 0;
+                    min-height: 100vh;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #2b0b35;
+                    padding: 16px;
+                    box-sizing: border-box;
+                    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+                  }
+
+                  .wrap {
+                    width: 100%;
+                    max-width: 430px;
+                    text-align: center;
+                  }
+
+                  img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 24px;
+                    box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+                  }
+
+                  p {
+                    color: rgba(255,255,255,0.82);
+                    font-size: 14px;
+                    line-height: 1.5;
+                    margin: 16px 0 0;
+                  }
+                </style>
+              </head>
+              <body>
+                <div class="wrap">
+                  <img src="${dataUrl}" alt="Ma carte Signature" />
+                  <p>Appuie longtemps sur la carte pour l’enregistrer dans tes photos.</p>
+                </div>
+              </body>
+            </html>
+          `)
+
+          imageWindow.document.close()
+        } else {
+          alert(
+            "La carte est prête, mais ton navigateur a bloqué l’ouverture. Autorise les pop-ups pour l’enregistrer."
+          )
+        }
+
+        setIsDownloading(false)
+        return
+      }
+
       const link = document.createElement("a")
-      link.download = `${fileName}.png`
       link.href = dataUrl
+      link.download = `${fileName}.png`
+      document.body.appendChild(link)
       link.click()
-    } finally {
+      document.body.removeChild(link)
+
       setIsDownloading(false)
+    } catch (error) {
+      console.error("Erreur téléchargement carte :", error)
+      setIsDownloading(false)
+
+      alert(
+        "La carte n’a pas pu être préparée. Essaie de recharger la page, ou teste depuis Chrome."
+      )
     }
   }
 
